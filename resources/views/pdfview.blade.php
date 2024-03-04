@@ -109,7 +109,7 @@
                         </h2>
                     </td>
                     <td style="text-align:right">
-                        <img src="./client-logo.jpg" width="150">
+                        <img src="./client-logo.jpg" width="90">
                     </td>
                 </tr>
             </table>
@@ -127,7 +127,7 @@
                         </h2>
                     </td>
                     <td style="text-align:right">
-                        <img src="{{ env('CLIENT_LOGO_PATH_FOR_MAIL','C:/inetpub/wwwroot/cpcldpr/dprapi/public/client-logo.jpg') }}" width="150">
+                        <img src="{{ env('CLIENT_LOGO_PATH_FOR_MAIL','C:/inetpub/wwwroot/cpcldpr/dprapi/public/client-logo.jpg') }}" width="90">
                     </td>
                 </tr>
             </table>
@@ -138,7 +138,7 @@
         <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
             <img src="{{ $appSetting->app_logo }}" width="150">
             <div style="position: absolute; top: 40px; right: 5px;">
-                <img src="{{ asset('client-logo.jpg') }}" width="150">
+                <img src="{{ asset('client-logo.jpg') }}" width="85">
             </div>
             <br>
              {{ $appSetting->app_name }}
