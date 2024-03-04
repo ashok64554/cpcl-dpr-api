@@ -84,6 +84,11 @@
       .text-right{
         text-align: right;
       }
+      table.headTable {
+        width: 100%;
+        overflow: hidden;
+        border: 1px transparent solid; 
+      }
     </style>
   </head>
   <body>
@@ -92,21 +97,56 @@
          @php
             $appSetting = App\Models\AppSetting::first();
          @endphp
-        @if($type=='pdf')
+         @if($type=='pdf')
         <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
-            <img src="./kpmg-logo.jpeg" width="150"><br>
-             {{ $appSetting->app_name }}
+            <table class="headTable" width="100%" border="0px">
+                <tr>
+                    <td style="text-align:right" width="65%">
+                        <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
+                            <img src="./kpmg-logo.jpeg" width="150">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            {{ $appSetting->app_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </h2>
+                    </td>
+                    <td style="text-align:right">
+                        <img src="./client-logo.jpg" width="150">
+                    </td>
+                </tr>
+            </table>
+            
+        </h2>
+        @elseif($type=='pdfmail')
+        <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
+            <table class="headTable" width="100%" border="0px">
+                <tr>
+                    <td style="text-align:right" width="65%">
+                        <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
+                            <img src="{{ env('KPMG_LOGO_PATH_FOR_MAIL','C:/inetpub/wwwroot/cpcldpr/dprapi/public/kpmg-logo.jpeg') }}" width="150">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <br>
+                            {{ $appSetting->app_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </h2>
+                    </td>
+                    <td style="text-align:right">
+                        <img src="{{ env('CLIENT_LOGO_PATH_FOR_MAIL','C:/inetpub/wwwroot/cpcldpr/dprapi/public/client-logo.jpg') }}" width="150">
+                    </td>
+                </tr>
+            </table>
+            
         </h2>
         @else
+       
         <h2 class="name" style="text-align: center; margin-right: 25px; color: #00338d">
-            <img src="{{ $appSetting->app_logo }}" width="150"><br>
+            <img src="{{ $appSetting->app_logo }}" width="150">
+            <div style="position: absolute; top: 40px; right: 5px;">
+                <img src="{{ asset('client-logo.jpg') }}" width="150">
+            </div>
+            <br>
              {{ $appSetting->app_name }}
         </h2>
         @endif
-
       </div>
     </header>
-    <main> 
+    <main>  
       
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       Please find the Daily Progress Report for {{ date('d M Y', strtotime($date)) }} below:
@@ -286,7 +326,7 @@ Regards,<br>
 KPMG PIVOT Team<br>
 <a href="mailto:in-fmpivotsupport@kpmg.com">in-fmpivotsupport@kpmg.com</a><br>
 <hr>
-2023 KPMG International Cooperative<br>
+{{ date('Y')}} KPMG International Cooperative<br>
 <hr>
 KPMG (in India) allows reasonable personal use of the e-mail system. Views and opinions expressed in these communications do not necessarily represent those of KPMG (in India).<br>
 

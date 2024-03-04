@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('manpower_sheet_name')->nullable();
             $table->string('man_power_cell_val')->nullable();
             $table->string('man_power_row_pos')->nullable();
+            $table->string('plan_man_power_cell_val')->nullable();
+            $table->string('plan_man_power_row_pos')->nullable();
             $table->string('slug');
             $table->boolean('status')->default('1')->comment('1:Active,2:Inactive');
             $table->timestamps();

@@ -26,6 +26,7 @@ class DprImport extends Model
         'item_desc',
         'random_no',
         'manpower',
+        'plan_manpower',
        
     ];
 

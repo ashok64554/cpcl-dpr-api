@@ -45,6 +45,8 @@ class DprMapController extends Controller
                 $dprConfig->manpower_sheet_name = $request->manpower_sheet_name;
                 $dprConfig->man_power_cell_val = $request->man_power_cell_val;
                 $dprConfig->man_power_row_pos = $request->man_power_row_pos;
+                $dprConfig->plan_man_power_cell_val = $request->plan_man_power_cell_val;
+                $dprConfig->plan_man_power_row_pos = $request->plan_man_power_row_pos;
                 $dprConfig->save();
                 $maxCount = 0; // Initialize with a negative value
                 $maxMapValue = [];

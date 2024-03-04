@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('dpr_manage_id')->nullable();
             $table->date('data_date')->nullable();
             $table->integer('manpower')->nullable();
+            $table->integer('plan_manpower')->nullable();
             $table->timestamps();
         });
     }

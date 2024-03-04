@@ -230,6 +230,7 @@ class DprImportController extends Controller
 				$organizedData = [];
 				$posValx = [];
 		    	$manpowerValue=0;
+		    	$plan_manpower=0;
 				$import = $spreadsheet->getSheetByName($sheet_name);
 
 				$manpower_sheet_name = trim($sheetname->manpower_sheet_name);
@@ -244,6 +245,12 @@ class DprImportController extends Controller
                 				$manpower_pos =  (!empty($sheetname->man_power_cell_val && $sheetname->man_power_row_pos )) ? $sheetname->man_power_cell_val.$sheetname->man_power_row_pos : NULL;
                 			
                 				$manpowerValue = (!empty($manpower_pos)) ? $manpower_import->getCell($manpower_pos)->getCalculatedValue(): NULL;
+
+                				$plan_manpower_pos =  (!empty($sheetname->plan_man_power_cell_val && $sheetname->plan_man_power_row_pos )) ? $sheetname->plan_man_power_cell_val.$sheetname->plan_man_power_row_pos : NULL;
+                			
+                				$plan_manpower = (!empty($plan_manpower_pos)) ? $manpower_import->getCell($plan_manpower_pos)->getCalculatedValue(): NULL;
+
+
                                 $found = true;
                                 break;
                             }
@@ -342,6 +349,7 @@ class DprImportController extends Controller
 						$dprImport->random_no = $random_no;
 						$dprImport->item_desc = $key;
 						$dprImport->manpower = $manpowerValue;
+						$dprImport->plan_manpower = $plan_manpower;
 						$dprImport->data_date = date('Y-m-d',strtotime($data_date));
 						$dprImport->save();
 

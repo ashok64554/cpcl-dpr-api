@@ -227,16 +227,19 @@ class DashboardController extends Controller
                     }
                     $dprUploads = $dprUploads->get();
                     $manpower = 0;
+                    $plan_manpower = 0;
                     if($dprUploads->count()>0)
                     {
                         foreach ($dprUploads as $skey => $dprUpload) 
                         {
                             $manpower += $dprUpload->manpower;
+                            $plan_manpower += $dprUpload->plan_manpower;
                         }
                     }
                     
                     $data['date'][] = date('Y-m-d',strtotime($date));
-                    $data['data'][] = $manpower;
+                    $data['actual_manpower'][] = $manpower;
+                    $data['plan_manpower'][] = $plan_manpower;
                 }
             }
             else{
@@ -266,16 +269,19 @@ class DashboardController extends Controller
                     }
                     $dprUploads = $dprUploads->get();
                     $manpower = 0;
+                    $plan_manpower = 0;
                     if($dprUploads->count()>0)
                     {
                         foreach ($dprUploads as $skey => $dprUpload) 
                         {
                             $manpower += $dprUpload->manpower;
+                            $plan_manpower += $dprUpload->plan_manpower;
                         }
                     }
                     $date = date('Y-'.$m.'-d');
                     $data['months'][] = date('M',strtotime($date));
-                    $data['data'][] = $manpower;
+                    $data['actual_manpower'][] = $manpower;
+                    $data['plan_manpower'][] = $plan_manpower;
                 }
             }
             return response(prepareResult(false, $data, trans('translate.manpower_graph')), config('httpcodes.success'));
@@ -322,11 +328,12 @@ class DashboardController extends Controller
                        
                         foreach ($projectConfigs as $key => $value) {
                             $profile_name = $value->profile_name;
-                            $manpower_data = DprImport::where('dpr_config_id',$value->id)->select('manpower')->first();
+                            $manpower_data = DprImport::where('dpr_config_id',$value->id)->select('manpower','plan_manpower')->first();
                             
                             $manpower = (!empty($manpower_data)) ? $manpower_data->manpower:0;
+                            $plan_manpower = (!empty($manpower_data)) ? $manpower_data->plan_manpower:0;
                                 
-                            $projectData['profiles'][] = ['profile_name'=>$profile_name,'manpower'=>$manpower,'work_package'=>@$value->WorkPackage->name];
+                            $projectData['profiles'][] = ['profile_name'=>$profile_name,'actual_manpower'=>$manpower, 'plan_manpower'=> $plan_manpower,'work_package'=>@$value->WorkPackage->name];
                         }
                         $data[] = $projectData;
                     }   
